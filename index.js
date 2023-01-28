@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const authRoute = require("./routes/auth");
 
 dotenv.config();
 
@@ -18,6 +19,9 @@ mongoose.connect(process.env.MONGODB_CONNECTION, (err) => {
 
 server.use(express.json());
 
+//routes
+server.use("/api/auth", authRoute);
+
 server.listen(port, () => {
-  console.log("Server is read to rip");
+  console.log(`Server is ready to rip at port ${port}`);
 });
