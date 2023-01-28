@@ -7,6 +7,8 @@ dotenv.config();
 const server = express();
 const port = 3000;
 
+mongoose.set("strictQuery", false);
+
 mongoose.connect(process.env.MONGODB_CONNECTION, (err) => {
   if (err) {
     console.log(err);
