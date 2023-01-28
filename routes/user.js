@@ -24,6 +24,18 @@ router.put("/:id", async (req, res) => {
 });
 
 //delete user
+router.delete("/:id", async (req, res) => {
+  if (req.body.userId === req.params.id) {
+    try {
+      await User.findByIdAndDelete(req.params.id);
+      res.status(200).json("user deleted");
+    } catch (err) {
+      res.status(500).json("We are getting an error");
+    }
+  } else {
+    res.status(401).json("you can only delete your own account");
+  }
+});
 
 //get user
 
