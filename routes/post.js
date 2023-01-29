@@ -22,6 +22,29 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//update a post
+router.put("/:id", async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (post.username == req.body.username) {
+    try {
+      const updatedPost = await Post.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      console.log(updatedPost.description);
+      res.status(200).json(updatedPost);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(401).json("you can only update your own post");
+  }
+});
+
 //delete a post
+
 //get feed?
 module.exports = router;
