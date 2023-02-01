@@ -59,5 +59,28 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//get feed?
+//get all posts
+router.get("/", async (req, res) => {
+  const username = req.query.user;
+  const categoryName = req.query.category;
+  try {
+    let posts;
+    if (username) {
+      posts = await Post.find({ username });
+    } else if (categoryName) {
+      posts = await Post.find({
+        categories: {
+          $in: [categoryName],
+        },
+      });
+    } else {
+      posts = await Post.find();
+    }
+
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
