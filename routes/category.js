@@ -11,13 +11,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const category = await Category.find();
-//     res.status(200).json(category);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    const category = await Category.find();
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
