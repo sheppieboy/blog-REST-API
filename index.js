@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const postRoute = require("./routes/post");
+const categoryRoute = require("./routes/category");
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ server.use(express.json());
 server.use("/api/auth", authRoute);
 server.use("/api/users", userRoute);
 server.use("/api/posts", postRoute);
+server.use("./api/categories", categoryRoute);
 
 server.listen(port, () => {
   console.log(`Server is ready to rip at port ${port}`);
